@@ -35,7 +35,7 @@
                                         <div id="example1_filter" class="dataTables_filter" style="text-align: left">
                                             <label>
                                                 供应商编码:
-                                                <input id="ID3" name="example1_length"  class="form-control form-control-sm" aria-controls="example1" value="">
+                                                <input id="ID3" name="example1_length"  class="form-control form-control-sm" aria-controls="example1" value="1791" readonly>
 
                                                 上次获取时间:
                                                 <input id="time" name="example1_length"  class="form-control form-control-sm" aria-controls="example1" readonly value="">
@@ -100,14 +100,17 @@
     </div>
 
     <script>
-
-        $("#ID3").blur(function () {
+        $(function () {
             var ID3 = $('#ID3').val();
             var url = "{{url('admin/consumableGetTime')}}";
             $.post(url, {'ID3': ID3}, function (data) {
                 $('#time').val(data);
             });
-        });
+        })
+
+        // $("#ID3").blur(function () {
+        //
+        // });
 
 
 
@@ -121,6 +124,7 @@
                 data:{'ID3': ID3, 'time': time},
                 success:function(msg){
                     $('#table').html(msg);
+                    alert('获取物资字典成功')
                 }
 
             });

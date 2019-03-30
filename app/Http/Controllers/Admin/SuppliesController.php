@@ -32,14 +32,16 @@ class SuppliesController extends Controller{
         $param['HospitalCode'] = "Test001";
         $param['IP'] = $this->get_real_ip();
         $param['MAC'] = $obj->macAddr;
-        $id = $this->request->post('ID3');
+//        $id = $this->request->post('ID3');
+        $id = '1791';
         $lastTime = DB::table('dic_consumable_time')->select('time')->where('ID3',$id)->orderBy('id','DESC')->limit(1)->get()->toArray();
         $lastTime =$this->request->post('time');
-        $lastTime ="2018-01-01 01:01:01";
-        if (empty($id)){
-            return $this->errorResponse('供应商编码为空','206');
-        }
-        DB::table('dic_consumable_time')->insert(['ID3'=>$id,'time'=>date("Y-m-d h:m:s")]);
+//        $lastTime ="2018-01-01 01:01:01";
+//        if (empty($id)){
+//            return $this->errorResponse('供应商编码为空','206');
+//        }
+            $insert_time =date("Y-m-d h:m:s");
+        DB::table('dic_consumable_time')->insert(['ID3'=>$id,'time'=>$insert_time]);
         $param['Data'] = array("ID3" => $id, "Last_time" => $lastTime);
 //        echo json_encode($param);exit();
         $res = $this->http_post_json('http://222.72.92.35:8091/dep/business/get', json_encode($param));
@@ -54,8 +56,31 @@ class SuppliesController extends Controller{
 //                if(!array_key_exists($j,$res))
 //                    exit($j.'不存在');
 //            }
+            if (empty($data['Data'])){
+                $data = DB::table('dic_consumable')->orderBy('id', 'DESC')->paginate(15);
+                return view('admin/consumable/table',['data'=>$data]);
+            }
+
+
             if($data['Code']==0&&$data['Completed']==true){
+
                 $data = $data['Data'];
+
+                $uniCode = DB::table('dic_consumable')->get(['UniCode'])->toArray();
+                $uniCode = array_column($uniCode,'UniCode');
+
+                foreach ($data as $k=>$v){
+                    if (in_array($v['UniCode'],$uniCode)){
+                        unset($data[$k]);
+                    }
+                }
+
+                if (empty($data)){
+                    $data = DB::table('dic_consumable')->orderBy('id', 'DESC')->paginate(15);
+                    return view('admin/consumable/table',['data'=>$data]);
+                }
+
+
                 foreach ($data as $k=>$v){
                     $data[$k]['CreatedAt'] = $date;
                     $data[$k]['Token']     = time().uniqid();
@@ -76,7 +101,7 @@ class SuppliesController extends Controller{
 
                     $data = DB::table('dic_consumable')->orderBy('id', 'DESC')->paginate(15);
 
-                    return view('admin/consumable/table',['data'=>$data]);
+                    return view('admin/consumable/table',['data'=>$data,'res'=>'成功']);
                 }else {
                     return $this->errorResponse('插入失败','206');
                 }
@@ -153,7 +178,11 @@ class SuppliesController extends Controller{
     public function getTime(){
             $ID3 = Request()->input('ID3');
             $lastTime = DB::table('dic_consumable_time')->select('time')->where('ID3',$ID3)->orderBy('id','DESC')->first();
-            $lastTime = $lastTime->time;
+            if (empty($lastTime)) {
+                $lastTime = '2018-01-01 01:01:01';
+            }else{
+                $lastTime = $lastTime->time;
+            }
             return $lastTime;
     }
 

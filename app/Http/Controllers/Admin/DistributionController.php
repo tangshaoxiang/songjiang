@@ -7,6 +7,7 @@
  */
 namespace App\Http\Controllers\Admin;
 
+use App\DicConsumable;
 use App\DicOrder;
 use App\DicOrderDetail;
 use App\GetMac;
@@ -31,7 +32,7 @@ class DistributionController extends Controller{
             $param['IP'] = $this->get_real_ip();
             $param['MAC'] = $obj->macAddr;
             $param['HostName'] = $_SERVER['SERVER_NAME'];
-            $order = DicOrder::get()->toArray();
+            $order = DicOrder::where('status',1)->get()->toArray();
             //获取订单明细数据$orderDetail
             $orderDetail = array_column($order,'PurchaseDetail');
             foreach ($orderDetail as $k=>$id_str){
@@ -56,9 +57,12 @@ class DistributionController extends Controller{
                     unset($orderDetail[$k][$k1]['PurchaseCategory']);
                     unset($orderDetail[$k][$k1]['Id']);
                     unset($orderDetail[$k][$k1]['Seq']);
-                    $goodsDetail[$k][$k1] = DB::table('dic_goods')->select('Name','Unicode','Spec','Manufacturer','Unit','Price','Memo')->where('UniCode',$v1['UniCode'])->orderBy('id','DESC')->limit(1)->get()->toArray();
+                    $goodsDetail[$k][$k1] = DicConsumable::select('Name','Spec','Manufacturer')->where('UniCode',$v1['UniCode'])->orderBy('id','DESC')->first()->toArray();
+//                    $goodsDetail[$k][$k1] = DB::table('dic_consumable')->select('Name','Spec','Manufacturer')->where('UniCode',$v1['UniCode'])->orderBy('id','DESC')->first();
                 }
             }
+
+
 
 
 
@@ -97,7 +101,7 @@ class DistributionController extends Controller{
                 $insert[$k]['PurchaseOrderNo'] = $v['OrderNo'];
                 $insert[$k]['HospitalCode'] = $v['HospitalCode'];
                 $insert[$k]['SupplierCode'] = $v['SupplierCode'];
-//                $insert[$k]['ID3'] = $v['ID3'];
+                $insert[$k]['ID3'] = $v['ID3'];
                 $insert[$k]['Unit'] = '配送单位';
                 $insert[$k]['OrderNO'] = time().uniqid();
                 $insert[$k]['SaleType'] = 0;
@@ -139,7 +143,7 @@ class DistributionController extends Controller{
 //            $url = "www.songjiang.cn:8000/admin/get_back";
         $url = "http://222.72.92.35:8091/dep/business/post";
             $jsonStr = json_encode($param);
-echo $jsonStr;exit();
+
             $httpResult = $this->http_post_json($url, $jsonStr);
             if ($httpResult['code']==200){
               DB::table('dic_order')->whereIn('id',$id_arr)->update(['status'=>2]);

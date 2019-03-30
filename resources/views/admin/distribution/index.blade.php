@@ -99,7 +99,7 @@
             if ($('tbody input:checked').length == 0) {
                 alert('请至少选中一个数据')
             } else {
-                if (confirm('确定删除吗')) {
+                if (confirm('确定推送吗')) {
                     var id = '';
                     $('tbody input:checked').each(function (k, v) {
                         id = id + $(v).attr('data-id') + ','
@@ -118,9 +118,9 @@
                                 var id = $(v).attr('data-id');
                                 $('tr[order-id=' + id + ']').remove();
                             })
-                            alert('删除成功');
+                            alert('推送成功');
                         } else {
-                            alert('删除失败');
+                            alert('推送失败');
                         }
                     }, 'text')
                 }

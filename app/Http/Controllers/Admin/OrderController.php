@@ -62,6 +62,11 @@ class OrderController extends Controller{
 
 
 
+
+
+
+
+
 //            $p = array('BusinessType', 'HospitalCode', 'IP', 'MAC', 'HostName', 'Data');
 //            for ($i = 0; $i < count($p); $i++) {
 //                $j = $p[$i];
@@ -71,16 +76,29 @@ class OrderController extends Controller{
             $token = time() . uniqid();
             $res_data  = $res['Data'];
 //
-//            foreach ($res_data as $k=>$detail){
-//                foreach ($detail as $k1=>$v1){
+//            foreach ($res_data as $k=>$v){
+//                foreach ($v as $k1=>$v1){
 //                    if (empty($v1['DeptCode'])||empty($v1['StoreCode'])){
 //                        unset($res_data[$k]);
 //                    }
 //                }
 //            }
+//            dd($res_data);
+            $order_no = DB::table('dic_order')->get(['OrderNo'])->toArray();
+            $order_no = array_column($order_no,'OrderNo');
 
 
 
+            foreach ($res_data as $k=>$v){
+                 if (in_array($v['OrderNO'],$order_no)){
+                     unset($res_data[$k]);
+                 }
+            }
+
+           if (empty($res_data)){
+               $data = DB::table('dic_order')->orderBy('id', 'DESC')->paginate(15);
+               return view('admin/order/table',['data'=>$data]);
+           }
             foreach ($res_data as $k => $detail) {
 
                 $order = $k + 1;
