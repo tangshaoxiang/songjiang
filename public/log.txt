@@ -1,0 +1,1 @@
+<xml><appid><![CDATA[wx5148997d3dea69f7]]></appid><mch_id>1490441692</mch_id><nonce_str><![CDATA[eaf73ba2aad4e4f0db6ade641c3bd215]]></nonce_str><out_trade_no>222</out_trade_no><sign><![CDATA[78800592739393F491D787F9D5400163]]></sign></xml>
