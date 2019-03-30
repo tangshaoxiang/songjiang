@@ -122,7 +122,14 @@
                 type: 'POST',
                 data: {'SupplierCode': SupplierCode, 'Kssj': Kssj, 'Jssj': Jssj, 'DownloadState': DownloadState, 'Count': Count},
                 success: function (msg) {
-                    $('#table').html(msg);
+                    
+                    if (msg.code=='206'){
+                        alert(msg.error);
+                    }else{
+                        $('#table').html(msg);
+                        alert('获取订单成功')
+                    }
+
                 }
 
             });

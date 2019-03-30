@@ -88,17 +88,16 @@ class OrderController extends Controller{
             $order_no = array_column($order_no,'OrderNo');
 
 
-
             foreach ($res_data as $k=>$v){
                  if (in_array($v['OrderNO'],$order_no)){
                      unset($res_data[$k]);
                  }
             }
 
-           if (empty($res_data)){
-               $data = DB::table('dic_order')->orderBy('id', 'DESC')->paginate(15);
-               return view('admin/order/table',['data'=>$data]);
-           }
+            if (empty($res_data)){
+                $data = DB::table('dic_order')->orderBy('id', 'DESC')->paginate(15);
+                return view('admin/order/table',['data'=>$data]);
+            }
             foreach ($res_data as $k => $detail) {
 
                 $order = $k + 1;

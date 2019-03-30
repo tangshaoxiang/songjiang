@@ -13,7 +13,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item active">@yield('title')</li>
-                            <li class="breadcrumb-item"><a href="{{asset('admin/pri_add')}}">权限添加</a></li>
+                            <li class="breadcrumb-item"><a href="{{asset('admin/pri_add')}}"></a></li>
                         </ol>
                     </div>
                 </div>
