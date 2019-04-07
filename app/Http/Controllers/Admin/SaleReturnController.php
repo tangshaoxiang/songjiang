@@ -51,6 +51,7 @@ class SaleReturnController extends Controller{
 
 
             $res = $this->getCurl('www.songjiang.cn:8000/admin/return_get?' . http_build_query($param));
+//            dd($res);
             $res = json_decode($res, true);
 
 
@@ -67,20 +68,28 @@ class SaleReturnController extends Controller{
 //                exit($j . '不存在');
 //        }
             $token = time() . uniqid();
+            $data_arr = $res['Data'];
+            $refund_no = DB::table('dic_sales_return')->get(['RefundNO'])->toArray();
+            $refund_no = array_column($refund_no,'RefundNO');
 
-            foreach ($res['Data'] as $k => $v) {
-                foreach ($v['RefundDetail'] as $k1 => $v1) {
-                    $res['Data'][$k]['RefundDetail'][$k1]['Token'] = $token;
-                    $res['Data'][$k]['RefundDetail'][$k1]['CreatedAt'] = $date;
+            foreach ($data_arr as $k=>$v){
+                if (in_array($v['RefundNO'],$refund_no)){
+                    unset($data_arr[$k]);
                 }
             }
-            foreach ($res['Data'] as $k => $detail) {
 
+
+            foreach ($data_arr as $k => $v) {
+                foreach ($v['RefundDetail'] as $k1 => $v1) {
+                    $data_arr[$k]['RefundDetail'][$k1]['Token'] = $token;
+                    $data_arr[$k]['RefundDetail'][$k1]['CreatedAt'] = $date;
+                }
+            }
+
+          if (!empty($data_arr)){
+            foreach ($data_arr as $k => $detail) {
                 $sales_return = $k + 1;
-
-
                 $res_detail = DB::table('dic_sales_return_detail')->insert($detail['RefundDetail']);
-
 
                 $id = DB::getPdo()->lastInsertId();
                 $count = count($detail['RefundDetail']) + $id;
@@ -103,6 +112,9 @@ class SaleReturnController extends Controller{
                 $data['CreatedAt'] = $date;
                 $insert_sales_return_data[$k] = $data;
             }
+          }else{
+              $insert_sales_return_data = [];
+          }
 
             $res_data = DB::table('dic_sales_return')->insert($insert_sales_return_data);
             if ($res_data) {
@@ -119,7 +131,7 @@ class SaleReturnController extends Controller{
 
     public function get()
     {
-        echo '{
+        return '{
     "BusinessType":"YY104",
     "HospitalCode":"test02",
     "IP":"192.168.0.1",

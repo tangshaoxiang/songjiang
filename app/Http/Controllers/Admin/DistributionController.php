@@ -143,7 +143,7 @@ class DistributionController extends Controller{
 //            $url = "www.songjiang.cn:8000/admin/get_back";
         $url = "http://222.72.92.35:8091/dep/business/post";
             $jsonStr = json_encode($param);
-
+//           echo $jsonStr;exit();
             $httpResult = $this->http_post_json($url, $jsonStr);
             if ($httpResult['code']==200){
               DB::table('dic_order')->whereIn('id',$id_arr)->update(['status'=>2]);
@@ -151,7 +151,6 @@ class DistributionController extends Controller{
             }else{
               return 2;
             }
-
 
             $data = DB::table('dic_order')->where('status','1')->orderBy('id', 'DESC')->paginate(15);
             return view('admin/distribution/table',['data'=>$data]);
@@ -163,15 +162,4 @@ class DistributionController extends Controller{
     }
 
 
-    public function getBack(){
-
-        $id = [1,2,3,4,5];
-
-        foreach ($id as $k=>$v){
-
-
-        }
-
-        return ['code'=>200];
-    }
 }
