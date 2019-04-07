@@ -50,15 +50,15 @@ class SaleReturnController extends Controller{
             $param['Data'] = array("SupplierCode" => "SupplierCode", "Count" => "Count", "DownloadState" => "DownloadState", "Kssj" => "Kssj", "Jssj" => "Jssj");
 
 
-            $res = $this->getCurl('www.songjiang.cn:8000/admin/return_get?' . http_build_query($param));
+//            $res = $this->getCurl('www.songjiang.cn:8000/admin/return_get?' . http_build_query($param));
 //            dd($res);
-            $res = json_decode($res, true);
-
-
-//            $res = $this->http_post_json('http://222.72.92.35:8091/dep/business/get', json_encode($param));
-//            file_put_contents(public_path('erp.log'), 'order--' . $date . ':' . json_encode($res) . PHP_EOL, FILE_APPEND | LOCK_EX);
-//            $res = $res['data'];
 //            $res = json_decode($res, true);
+
+
+            $res = $this->http_post_json('http://222.72.92.35:8091/dep/business/get', json_encode($param));
+//            file_put_contents(public_path('erp.log'), 'order--' . $date . ':' . json_encode($res) . PHP_EOL, FILE_APPEND | LOCK_EX);
+            $res = $res['data'];
+            $res = json_decode($res, true);
 
 
 //        $p = array('BusinessType', 'HospitalCode', 'IP', 'MAC', 'HostName', 'Data');
