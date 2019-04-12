@@ -151,8 +151,8 @@ class DistributionController extends Controller{
             $code = json_decode($httpResult['data'],true)['Code'];
             if ($code==200){
               DB::table('dic_order')->whereIn('id',$id_arr)->update(['status'=>2]);
-//              return $this->export($data);
-                return ['code'=>0,'url'=>'/admin/distribution'];
+              return $this->export($data);
+//                return ['code'=>0,'url'=>'/admin/distribution'];
             }else{
               return ['code'=>1,'url'=>''];
             }
