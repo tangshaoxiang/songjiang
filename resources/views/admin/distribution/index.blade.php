@@ -111,10 +111,12 @@
                     var Jssj = $('#Jssj').val();
                     var DownloadState = $('#DownloadState').val();
                     var Count = $('#Count').val();
+
                     $.post(url, {'SupplierCode': SupplierCode, 'Kssj': Kssj, 'Jssj': Jssj, 'DownloadState': DownloadState, 'Count': Count,'id':id}, function (data) {
-                        console.log(data);
-                        if (data==1) {
+                        var ev = eval('(' + data + ')');
+                        if (ev.code==0) {
                             $('tbody input:checked').each(function (k, v) {
+                                document.location.href ='{{url("")}}'+ev.url;
                                 var id = $(v).attr('data-id');
                                 $('tr[order-id=' + id + ']').remove();
                             })

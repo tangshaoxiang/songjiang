@@ -21,7 +21,6 @@ class OrderController extends Controller{
     public function index()
     {
         if ($this->request->isMethod('post')) {
-
             $obj = new GetMac('linux');
             $param['BusinessType'] = "MY101";
             $param['HospitalCode'] = "Test001";
@@ -75,15 +74,13 @@ class OrderController extends Controller{
 //            }
             $token = time() . uniqid();
             $res_data  = $res['Data'];
-//
             foreach ($res_data as $k=>$v){
-                foreach ($v as $k1=>$v1){
+                foreach ($v['PurchaseDetail'] as $k1=>$v1){
                     if (empty($v1['DeptCode'])||empty($v1['StoreCode'])){
                         unset($res_data[$k]);
                     }
                 }
             }
-//            dd($res_data);
             $order_no = DB::table('dic_order')->get(['OrderNo'])->toArray();
             $order_no = array_column($order_no,'OrderNo');
 
@@ -126,6 +123,7 @@ class OrderController extends Controller{
                 $data['CreatedAt'] = $date;
                 $insert_order_data[$k] = $data;
             }
+
             $res_data = DB::table('dic_order')->insert($insert_order_data);
             if ($res_data) {
                 $data = DB::table('dic_order')->orderBy('id', 'DESC')->paginate(15);

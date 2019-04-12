@@ -99,6 +99,7 @@ Route::group([
          */
         Route::any('distribution','DistributionController@index');                      //erp获取退货单
         Route::any('get_back','DistributionController@getBack');
+        Route::any('export','DistributionController@export');
 
 
 
