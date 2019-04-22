@@ -58,10 +58,10 @@ class DistributionController extends Controller{
                     unset($orderDetail[$k][$k1]['Id']);
                     unset($orderDetail[$k][$k1]['Seq']);
                     $goodsDetail[$k][$k1] = DicConsumable::select('Name','Spec','Manufacturer')->where('UniCode',$v1['UniCode'])->orderBy('id','DESC')->first()->toArray();
+
 //                    $goodsDetail[$k][$k1] = DB::table('dic_consumable')->select('Name','Spec','Manufacturer')->where('UniCode',$v1['UniCode'])->orderBy('id','DESC')->first();
                 }
             }
-
 
 
 
@@ -149,6 +149,7 @@ class DistributionController extends Controller{
 //           echo $jsonStr;exit();
             $httpResult = $this->http_post_json($url, $jsonStr);
             $code = json_decode($httpResult['data'],true)['Code'];
+            $code = 200;
             if ($code==200){
               DB::table('dic_order')->whereIn('id',$id_arr)->update(['status'=>2]);
               return $this->export($data);
