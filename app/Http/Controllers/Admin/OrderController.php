@@ -74,6 +74,7 @@ class OrderController extends Controller{
 //            }
             $token = time() . uniqid();
             $res_data  = $res['Data'];
+
             foreach ($res_data as $k=>$v){
                 foreach ($v['PurchaseDetail'] as $k1=>$v1){
                     if (empty($v1['DeptCode'])||empty($v1['StoreCode'])){

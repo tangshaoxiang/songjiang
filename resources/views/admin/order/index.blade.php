@@ -41,7 +41,7 @@
                                                 结束时间:
                                                 <input id="Jssj" type="date" name="example1_length"  class="form-control form-control-sm" aria-controls="example1" value="">
                                                 下载状态:
-                                                <input id="DownloadState" name="example1_length"  class="form-control form-control-sm" aria-controls="example1" value="">
+                                                <input id="DownloadState" name="example1_length"  class="form-control form-control-sm" aria-controls="example1" value="1">
                                             </label>
                                         </div>
                                     </div>
@@ -52,7 +52,7 @@
                                         <div id="example1_filter" class="dataTables_filter" style="text-align: left">
                                             <label>
                                                查询记录数:
-                                                <input id="Count" name="example1_length"  class="form-control form-control-sm" aria-controls="example1" value="">
+                                                <input id="Count" name="example1_length"  class="form-control form-control-sm" aria-controls="example1" value="100">
                                             </label>
                                             &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                                             <label><button id="search_button" >同步订单</button>
