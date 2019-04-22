@@ -55,6 +55,7 @@ class OrderController extends Controller{
 
             $res = $this->http_post_json('http://222.72.92.35:8091/dep/business/get', json_encode($param));
 //            file_put_contents(public_path('erp.log'), 'order--' . $date . ':' . json_encode($res) . PHP_EOL, FILE_APPEND | LOCK_EX);
+
             $res = $res['data'];
 //            dd($res);
             $res = json_decode($res, true);
@@ -73,6 +74,7 @@ class OrderController extends Controller{
 //                    exit($j . '不存在');
 //            }
             $token = time() . uniqid();
+
             $res_data  = $res['Data'];
 
             foreach ($res_data as $k=>$v){
