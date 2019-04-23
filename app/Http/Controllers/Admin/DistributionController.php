@@ -149,11 +149,12 @@ class DistributionController extends Controller{
 //           echo $jsonStr;exit();
             $httpResult = $this->http_post_json($url, $jsonStr);
             $code = json_decode($httpResult['data'],true)['Code'];
-            $code = 200;
+//            $code = 200;
             if ($code==200){
               DB::table('dic_order')->whereIn('id',$id_arr)->update(['status'=>2]);
-              return $this->export($data);
-//                return ['code'=>0,'url'=>'/admin/distribution'];
+//              return $this->export($data);
+                $data = DB::table('dic_order')->where('status','1')->orderBy('id', 'DESC')->paginate(15);
+                return view('admin/distribution/table',['data'=>$data]);
             }else{
               return ['code'=>1,'url'=>''];
             }
@@ -203,14 +204,13 @@ class DistributionController extends Controller{
         // 列名赋值
         $objPHPExcel->getActiveSheet()->setCellValue('A1', '');
         $objPHPExcel->getActiveSheet()->setCellValue('B1', '');
-        $objPHPExcel->getActiveSheet()->setCellValue('C1', '商品编码');
-        $objPHPExcel->getActiveSheet()->setCellValue('D1', '数量');
-        $objPHPExcel->getActiveSheet()->setCellValue('E1', '单价');
-        $objPHPExcel->getActiveSheet()->setCellValue('F1', '金额');
-        $objPHPExcel->getActiveSheet()->setCellValue('G1', '科室编号');
-        $objPHPExcel->getActiveSheet()->setCellValue('H1', '科室名称');
-        $objPHPExcel->getActiveSheet()->setCellValue('I1', '库房编码');
-        $objPHPExcel->getActiveSheet()->setCellValue('J1', '库房名称');
+        $objPHPExcel->getActiveSheet()->setCellValue('C1', '物资名称');
+        $objPHPExcel->getActiveSheet()->setCellValue('D1', '规格');
+        $objPHPExcel->getActiveSheet()->setCellValue('E1', '单位');
+        $objPHPExcel->getActiveSheet()->setCellValue('F1', '单价');
+        $objPHPExcel->getActiveSheet()->setCellValue('G1', '数量');
+        $objPHPExcel->getActiveSheet()->setCellValue('H1', '金额');
+        $objPHPExcel->getActiveSheet()->setCellValue('I1', '科室名称');
 
 
 
@@ -233,16 +233,16 @@ class DistributionController extends Controller{
 
             // 设置单元格数值
 //            $objPHPExcel->getActiveSheet()->setCellValue('A' . $row_num, $value['Id']);
-            $one = $row_num;
-            $two = $row_num+1;
-            $three = $row_num+2;
-            $four = $row_num+3;
+            $one = $row_num+1;
+            $two = $row_num+2;
+            $three = $row_num+3;
+            $four = $row_num+4;
 
 
             $objPHPExcel->getActiveSheet()->setCellValue('A' . $one, '订单编号：'.$value['PurchaseOrderNo']);
-            $objPHPExcel->getActiveSheet()->setCellValue('A' . $two, '订单编码：'.$value['OrderNO']);
-            $objPHPExcel->getActiveSheet()->setCellValue('A' . $three, '制单人:'.$value['Creator']);
-            $objPHPExcel->getActiveSheet()->setCellValue('A' . $four, '备注：'.$value['Memo']);
+//            $objPHPExcel->getActiveSheet()->setCellValue('A' . $two, '订单编码：'.$value['OrderNO']);
+            $objPHPExcel->getActiveSheet()->setCellValue('A' . $two, '制单人:'.$value['Creator']);
+            $objPHPExcel->getActiveSheet()->setCellValue('A' . $three, '备注：'.$value['Memo']);
 
 //            $objPHPExcel->getActiveSheet()->mergeCells('A'.$row_num.':'.'G'.$row_num);
 //            $objPHPExcel->getActiveSheet()->setCellValue('A' . $row_num, '推送单编号：'.$value['PurchaseOrderNo']
@@ -256,17 +256,16 @@ class DistributionController extends Controller{
 
             foreach ($value['DistributionDetail'] as $v){
                 $row_num++;
-                $objPHPExcel->getActiveSheet()->setCellValue('C' . $row_num, $v['UniCode']);
-                $objPHPExcel->getActiveSheet()->setCellValue('D' . $row_num, $v['Quantity']);
-                $objPHPExcel->getActiveSheet()->setCellValue('E' . $row_num, $v['Price']);
-                $objPHPExcel->getActiveSheet()->setCellValue('F' . $row_num, $v['Amount']);
-                $objPHPExcel->getActiveSheet()->setCellValue('G' . $row_num, $v['DeptCode']);
-                $objPHPExcel->getActiveSheet()->setCellValue('H' . $row_num, $v['DeptName']);
-                $objPHPExcel->getActiveSheet()->setCellValue('I' . $row_num, $v['StoreCode']);
-                $objPHPExcel->getActiveSheet()->setCellValue('J' . $row_num, $v['StoreName']);
+
+                $objPHPExcel->getActiveSheet()->setCellValue('C' . $row_num, $v['Name']);
+                $objPHPExcel->getActiveSheet()->setCellValue('D' . $row_num, $v['Spec']);
+                $objPHPExcel->getActiveSheet()->setCellValue('E' . $row_num, $v['Unit']);
+                $objPHPExcel->getActiveSheet()->setCellValue('F' . $row_num, $v['Price']);
+                $objPHPExcel->getActiveSheet()->setCellValue('G' . $row_num, $v['Quantity']);
+                $objPHPExcel->getActiveSheet()->setCellValue('H' . $row_num, $v['Amount']);
+                $objPHPExcel->getActiveSheet()->setCellValue('I' . $row_num, $v['DeptName']);
             }
             $row_num = $row_num + abs($count - 6) ;
-            $row_num++;
             $row_num++;
 
         }

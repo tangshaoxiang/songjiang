@@ -84,6 +84,7 @@ Route::group([
          */
         Route::any('order','OrderController@index');                      //erp获取订单
         Route::any('order_get','OrderController@get');                      //erp
+        Route::any('order_excel','OrderController@orderExcel');           //erp获取订单excel
 
 
         /**

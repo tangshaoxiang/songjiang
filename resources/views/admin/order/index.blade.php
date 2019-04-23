@@ -72,12 +72,12 @@
                                        <th>采购计划单号</th>
                                        <th>采购员</th>
                                        <th>总数量</th>
+                                       <th>生成excel</th>
                                        </thead>
                                        <tbody>
                                        @if(!$data->isEmpty())
                                            @foreach($data as $key=>$val)
-                                               <tr data-id="{{$val->Id}}">
-                                                   {{--<td><input type="checkbox" data-id="{{$val->id}}"></td>--}}
+                                               <tr order-id="{{$val->Id}}">
                                                    <td>{{$val->OrderNo}}</td>
                                                    <td>{{$val->OrderType}}</td>
                                                    <td>{{$val->SupplierCode}}</td>
@@ -87,6 +87,7 @@
                                                    <td>{{$val->PPOrderNo}}</td>
                                                    <td>{{$val->Employee}}</td>
                                                    <td>{{$val->SumQuantity}}</td>
+                                                   <td><button class="excel" data-id="{{$val->Id}}">生成excel</button></td>
                                                </tr>
                                            @endforeach
                                        @else
@@ -134,6 +135,58 @@
 
             });
         });
+
+
+
+        $('.excel').on('click', function () {
+                   var id =  $(this).attr('data-id')
+                    var url = "{{url('admin/order_excel')}}";
+                    $.post(url, {'id':id}, function (data) {
+                        var ev = eval('(' + data + ')');
+                        if (ev.code==0) {
+                                document.location.href ='{{url("")}}'+ev.url;
+                        } else {
+                            alert('生成excel失败');
+                        }
+                    }, 'text')
+        })
+
+
+
+        {{--$('#excel_button').on('click', function () {--}}
+            {{--if ($('tbody input:checked').length == 0) {--}}
+                {{--alert('请至少选中一个数据')--}}
+            {{--} else {--}}
+                {{--if (confirm('确定推送吗')) {--}}
+                    {{--var id = '';--}}
+                    {{--$('tbody input:checked').each(function (k, v) {--}}
+                        {{--id = id + $(v).attr('data-id') + ','--}}
+                    {{--})--}}
+
+                    {{--var url = "{{url('admin/order_excel')}}";--}}
+                    {{--var SupplierCode = $('#SupplierCode').val();--}}
+                    {{--var Kssj = $('#Kssj').val();--}}
+                    {{--var Jssj = $('#Jssj').val();--}}
+                    {{--var DownloadState = $('#DownloadState').val();--}}
+                    {{--var Count = $('#Count').val();--}}
+
+                    {{--$.post(url, {'SupplierCode': SupplierCode, 'Kssj': Kssj, 'Jssj': Jssj, 'DownloadState': DownloadState, 'Count': Count,'id':id}, function (data) {--}}
+                        {{--var ev = eval('(' + data + ')');--}}
+                        {{--if (ev.code==0) {--}}
+                            {{--$('tbody input:checked').each(function (k, v) {--}}
+                                {{--document.location.href ='{{url("")}}'+ev.url;--}}
+                                {{--var id = $(v).attr('data-id');--}}
+                                {{--$('tr[order-id=' + id + ']').remove();--}}
+                            {{--})--}}
+                            {{--alert('推送成功');--}}
+                        {{--} else {--}}
+                            {{--alert('推送失败');--}}
+                        {{--}--}}
+                    {{--}, 'text')--}}
+                {{--}--}}
+            {{--}--}}
+        {{--})--}}
+
 
     </script>
 

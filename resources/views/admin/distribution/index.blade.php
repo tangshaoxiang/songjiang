@@ -93,7 +93,6 @@
     </div>
 
     <script>
-
         //批量删除
         $('#search_button').on('click', function () {
             if ($('tbody input:checked').length == 0) {
@@ -113,22 +112,23 @@
                     var Count = $('#Count').val();
 
                     $.post(url, {'SupplierCode': SupplierCode, 'Kssj': Kssj, 'Jssj': Jssj, 'DownloadState': DownloadState, 'Count': Count,'id':id}, function (data) {
-                        var ev = eval('(' + data + ')');
-                        if (ev.code==0) {
-                            $('tbody input:checked').each(function (k, v) {
-                                document.location.href ='{{url("")}}'+ev.url;
-                                var id = $(v).attr('data-id');
-                                $('tr[order-id=' + id + ']').remove();
-                            })
-                            alert('推送成功');
-                        } else {
-                            alert('推送失败');
-                        }
+                        $('#table').html(data);
+                        alert('推送成功')
+                        {{--var ev = eval('(' + data + ')');--}}
+                        {{--if (ev.code==0) {--}}
+                            {{--$('tbody input:checked').each(function (k, v) {--}}
+                                {{--document.location.href ='{{url("")}}'+ev.url;--}}
+                                {{--var id = $(v).attr('data-id');--}}
+                                {{--// $('tr[order-id=' + id + ']').remove();--}}
+                            {{--})--}}
+                            {{--alert('推送成功');--}}
+                        {{--} else {--}}
+                            {{--alert('推送失败');--}}
+                        {{--}--}}
                     }, 'text')
                 }
             }
         })
-
     </script>
 
 @stop
