@@ -112,8 +112,12 @@
                     var Count = $('#Count').val();
 
                     $.post(url, {'SupplierCode': SupplierCode, 'Kssj': Kssj, 'Jssj': Jssj, 'DownloadState': DownloadState, 'Count': Count,'id':id}, function (data) {
-                        $('#table').html(data);
-                        alert('推送成功')
+                       if (data==0){
+                           alert('推送失败')
+                       } else{
+                           $('#table').html(data);
+                           alert('推送成功')
+                       }
                         {{--var ev = eval('(' + data + ')');--}}
                         {{--if (ev.code==0) {--}}
                             {{--$('tbody input:checked').each(function (k, v) {--}}

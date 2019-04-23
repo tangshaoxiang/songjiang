@@ -146,7 +146,6 @@ class DistributionController extends Controller{
 
         $url = "http://222.72.92.35:8091/dep/business/post";
             $jsonStr = json_encode($param);
-//           echo $jsonStr;exit();
             $httpResult = $this->http_post_json($url, $jsonStr);
             $code = json_decode($httpResult['data'],true)['Code'];
 //            $code = 200;
@@ -156,7 +155,7 @@ class DistributionController extends Controller{
                 $data = DB::table('dic_order')->where('status','1')->orderBy('id', 'DESC')->paginate(15);
                 return view('admin/distribution/table',['data'=>$data]);
             }else{
-              return ['code'=>1,'url'=>''];
+                return 0;
             }
 
         }else{
