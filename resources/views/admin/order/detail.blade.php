@@ -1,5 +1,5 @@
 @extends('/admin/layouts/main')
-@section('title','同步订单')
+@section('title','订单详情')
 @section('content')
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -33,16 +33,6 @@
                                 <div class="row">
                                     <div class="col-sm-12 col-md-12">
                                         <div id="example1_filter" class="dataTables_filter" style="text-align: left">
-                                            <label>
-                                                供应商编码:
-                                                <input id="SupplierCode" name="example1_length"  class="form-control form-control-sm" aria-controls="example1" value="1791" readonly>
-                                                开始时间:
-                                                <input id="Kssj" type="date" name="example1_length"  class="form-control form-control-sm" aria-controls="example1" value="">
-                                                结束时间:
-                                                <input id="Jssj" type="date" name="example1_length"  class="form-control form-control-sm" aria-controls="example1" value="">
-                                                下载状态:
-                                                <input id="DownloadState" name="example1_length"  class="form-control form-control-sm" aria-controls="example1" value="1">
-                                            </label>
                                         </div>
                                     </div>
                                 </div>
@@ -51,47 +41,53 @@
                                     <div class="col-sm-12 col-md-9">
                                         <div id="example1_filter" class="dataTables_filter" style="text-align: left">
                                             <label>
-                                               查询记录数:
-                                                <input id="Count" name="example1_length"  class="form-control form-control-sm" aria-controls="example1" value="100">
+                                                订单编号:{{$order->OrderNo}}
                                             </label>
-                                            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                                            <label><button id="search_button" >同步订单</button>
+                                            &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+                                            <label>
+                                                制单人:{{$order->Creator}}
                                             </label>
+                                            &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+                                            <label>
+                                                获取订单时间:{{$order->CreatedAt}}
+                                            </label>
+                                            &nbsp &nbsp &nbsp &nbsp &nbsp
+                                            <button class="excel" data-id="{{$order->Id}}">生成excel</button>
                                         </div>
                                     </div>
                                 </div>
+
+
+
                                <div id="table">
                                    <table  id="example1" class="table table-bordered table-striped">
                                        <thead>
-                                       <th>订单编号</th>
-                                       <th>总数量</th>
+                                       <th>物资名称</th>
+                                       {{--<th>品牌</th>--}}
+                                       <th>规格</th>
+                                       <th>单位</th>
+                                       <th>数量</th>
+                                       <th>单价</th>
                                        <th>总金额</th>
-                                       <th>配送单名称</th>
-                                       <th>制单时间</th>
-                                       <th width="80">制单人</th>
-                                       <th>获取订单时间</th>
-                                       <th>操作</th>
+                                       <th>科室名称</th>
+                                       <th>备注</th>
                                        </thead>
                                        <tbody>
-                                       @if(!$data->isEmpty())
-                                           @foreach($data as $key=>$val)
+                                           @foreach($detail as $key=>$val)
                                                <tr order-id="{{$val->Id}}">
-                                                   <td>{{$val->OrderNo}}</td>
-                                                   <td>{{$val->SumQuantity}}</td>
+                                                   <td>{{$val->Name}}</td>
+{{--                                                   <td>{{$val->Manufacturer}}</td>--}}
+                                                   <td>{{$val->Spec}}</td>
+                                                   <td>{{$val->Unit}}</td>
+                                                   <td>{{$val->Quantity}}</td>
+                                                   <td>{{$val->Price}}</td>
                                                    <td>{{$val->Amount}}</td>
-                                                   <td>{{$val->DistributionSite}}</td>
-                                                   <td>{{$val->CreateTime}}</td>
-                                                   <td>{{$val->Creator}}</td>
-                                                   <td>{{$val->CreatedAt}}</td>
-                                                   <td><button><a href="{{asset('admin/order_detail?id='.$val->Id)}}">详情</a></button>&nbsp            <button class="excel" data-id="{{$val->Id}}">生成excel</button></td>
+                                                   <td>{{$val->DeptName}}</td>
+                                                   <td>{{$val->Memo}}</td>
                                                </tr>
                                            @endforeach
-                                       @else
-                                           <tr><td colspan="9" style="text-align: center">暂无记录</td></tr>
-                                       @endif
                                        </tbody>
                                    </table>
-                                   {{ $data->links() }}
                                </div>
                             </div>
                         </div>

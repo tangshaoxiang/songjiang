@@ -146,6 +146,21 @@ class OrderController extends Controller{
 
         }
 
+    public function orderDetail(){
+        $id = Request()->input('id');
+        $order = DB::table('dic_order')->where('id',$id)->first();
+        $idArr = explode(',',$order->PurchaseDetail);
+        $detail =DB::table('dic_order_detail')->whereIn('Id',$idArr)->get()->toArray();
+        foreach ($detail as $k=>$v){
+          $goods = DicConsumable::select('Name','Spec','Manufacturer')->where('UniCode',$v->UniCode)->orderBy('id','DESC')->first()->toArray();
+          $detail[$k]->Name =   $goods['Name'];
+          $detail[$k]->Spec =   $goods['Spec'];
+          $detail[$k]->Manufacturer =   $goods['Manufacturer'];
+        }
+
+
+        return view('admin/order/detail',['detail'=>$detail,'order'=>$order]);
+    }
 
 
     public function orderExcel()
@@ -317,20 +332,33 @@ class OrderController extends Controller{
             ->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
         // 列名赋值
-        $objPHPExcel->getActiveSheet()->setCellValue('A1', '物资名称');
-        $objPHPExcel->getActiveSheet()->setCellValue('B1', '规格');
-        $objPHPExcel->getActiveSheet()->setCellValue('C1', '单位');
-        $objPHPExcel->getActiveSheet()->setCellValue('D1', '单价');
-        $objPHPExcel->getActiveSheet()->setCellValue('E1', '数量');
-        $objPHPExcel->getActiveSheet()->setCellValue('F1', '金额');
-        $objPHPExcel->getActiveSheet()->setCellValue('G1', '科室名称');
-        $objPHPExcel->getActiveSheet()->setCellValue('H1', '备注');
-        $objPHPExcel->getActiveSheet()->setCellValue('I1', '');
+        $objPHPExcel->getActiveSheet()->setCellValue('A1', '上海雨桓实业有限公司');
+        $objPHPExcel->getActiveSheet()->setCellValue('A2', '送货单');
+        $objPHPExcel->getActiveSheet()->setCellValue('A3', '客户名称：松江区中心医院');
+        $objPHPExcel->getActiveSheet()->setCellValue('J3', '送货日期');
+
+        $objPHPExcel->getActiveSheet()->mergeCells('A1'.':'.'J1');
+        $objPHPExcel->getActiveSheet()->mergeCells('A2'.':'.'J2');
+
+        $objPHPExcel->getActiveSheet()->getStyle('A1' . ':' . 'J1')->getAlignment()
+            ->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $objPHPExcel->getActiveSheet()->getStyle('A2' . ':' . 'J2')->getAlignment()
+            ->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $objPHPExcel->getActiveSheet()->setCellValue('A5', '物资名称');
+        $objPHPExcel->getActiveSheet()->setCellValue('B5', '规格');
+        $objPHPExcel->getActiveSheet()->setCellValue('C5', '单位');
+        $objPHPExcel->getActiveSheet()->setCellValue('D5', '单价');
+        $objPHPExcel->getActiveSheet()->setCellValue('E5', '数量');
+        $objPHPExcel->getActiveSheet()->setCellValue('F5', '金额');
+        $objPHPExcel->getActiveSheet()->setCellValue('G5', '科室名称');
+        $objPHPExcel->getActiveSheet()->setCellValue('H5', '备注');
+        $objPHPExcel->getActiveSheet()->setCellValue('I5', '');
 
 
 
         // 数据起始行
-        $row_num = 2;
+        $row_num = 6;
         $res =$data;
 //        dd($res);
         //向每行单元格插入数据
@@ -363,20 +391,26 @@ class OrderController extends Controller{
                 $objPHPExcel->getActiveSheet()->setCellValue('F' . $row_num, $v['Amount']);
                 $objPHPExcel->getActiveSheet()->setCellValue('G' . $row_num, $v['DeptName']);
             }
-            $row_num = $row_num + abs($count - 6) ;
+            $row_num = $row_num + abs($count - 3) ;
             $row_num++;
 
 
             $one = $row_num+1;
             $two = $row_num+2;
             $three = $row_num+3;
-            $four = $row_num+4;
+            $last = $row_num+5;
 
 
             $objPHPExcel->getActiveSheet()->setCellValue('J' . $one, '订单编号：'.$value['PurchaseOrderNo']);
 //            $objPHPExcel->getActiveSheet()->setCellValue('A' . $two, '订单编码：'.$value['OrderNO']);
             $objPHPExcel->getActiveSheet()->setCellValue('J' . $two, '制单人:'.$value['Creator']);
             $objPHPExcel->getActiveSheet()->setCellValue('J' . $three, '备注：'.$value['Memo']);
+
+
+            $objPHPExcel->getActiveSheet()->setCellValue('A' . $last, '送货单位及经手人：');
+            $objPHPExcel->getActiveSheet()->setCellValue('J' . $last, '收货单位及经手人：');
+
+
 
 //            $objPHPExcel->getActiveSheet()->mergeCells('A'.$row_num.':'.'G'.$row_num);
 //            $objPHPExcel->getActiveSheet()->setCellValue('A' . $row_num, '推送单编号：'.$value['PurchaseOrderNo']
