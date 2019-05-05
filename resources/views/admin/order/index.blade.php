@@ -84,7 +84,7 @@
                                                    <td>{{$val->Creator}}</td>
                                                    <td>{{$val->CreatedAt}}</td>
                                                    <td><button><a href="{{asset('admin/order_detail?id='.$val->Id)}}">详情</a></button>&nbsp
-                                                       {{--<button class="excel" data-id="{{$val->Id}}">生成excel</button>--}}
+                                                       <button class="excel" data-id="{{$val->Id}}">生成excel</button>
                                                    </td>
                                                </tr>
                                            @endforeach

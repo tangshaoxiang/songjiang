@@ -162,7 +162,8 @@ class OrderController extends Controller{
         $total = array_sum($total);
         $big   = $this->num_to_rmb($total);
 
-        return view('admin/order/detail',['detail'=>$detail,'order'=>$order,'total'=>$total,'big'=>$big]);
+
+        return view('admin/order/detail',['detail'=>$detail,'order'=>$order,'total'=>$total,'big'=>$big,'date'=>date('Y-m-d H:i:s'),'time'=>date('Y-m-d')]);
     }
 
     public function orderPdf(){
