@@ -40,6 +40,8 @@
     <link rel="stylesheet" href="{{asset('plugins/datatables/dataTables.bootstrap4.min.css')}}">
     <!-- jQuery -->
     <script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script>
+    <script src="{{asset('js/html2canvas.js')}}"></script>
     <!-- layer -->
     <script src="{{asset('layer/layer.js')}}"></script>
     <!-- Google Font: Source Sans Pro -->
