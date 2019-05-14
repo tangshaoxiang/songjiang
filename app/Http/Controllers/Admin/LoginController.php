@@ -49,6 +49,38 @@ class LoginController extends Controller
         return view('admin/login');
     }
 
+
+
+    public function testTime(){
+
+//        //即使Client断开(如关掉浏览器)，PHP脚本也可以继续执行.
+//        ignore_user_abort();
+//// 执行时间为无限制，php默认的执行时间是30秒，通过set_time_limit(0)可以让程序无限制的执行下去
+//        set_time_limit(0);
+//// 每隔5分钟运行
+//        $interval=5;
+//        do{
+//            $url = 'http://www.songjiang.cn:8000/admin/test_time';
+//$ch = curl_init();
+//curl_setopt($ch, CURLOPT_URL, $url);
+//curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+//curl_setopt($ch, CURLOPT_TIMEOUT, 2);
+//$result = curl_exec($ch);
+//curl_close($ch);
+//// 等待5分钟
+//sleep($interval);
+//}while(true);
+        ignore_user_abort();//关掉浏览器，PHP脚本也可以继续执行.
+        set_time_limit(0);// 通过set_time_limit(0)可以让程序无限制的执行下去
+        $interval=5;// 每隔半小时运行
+        do{
+            file_put_contents(public_path().'/log.txt',date('YmdHis').'test'.PHP_EOL,FILE_APPEND);
+            //这里是你要执行的代码
+            sleep($interval);// 等待5分钟
+        }while(true);
+
+    }
+
     public function login()
     {
         if ($this->request->isMethod('post')) {

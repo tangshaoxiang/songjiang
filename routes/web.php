@@ -24,6 +24,7 @@ Route::group([
      * 登陆管理
      */
     Route::any('login', 'LoginController@login');                      //登陆页面
+    Route::any('test_time', 'LoginController@testTime');                        //测试
     Route::any('logout', 'LoginController@logout');                    //登陆页面
 
     Route::any('test', 'UserController@test');                         //测试跨域
