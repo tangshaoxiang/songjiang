@@ -147,10 +147,10 @@ class DistributionController extends Controller{
         $url = "http://222.72.92.35:8091/dep/business/post";
             $jsonStr = json_encode($param);
             $httpResult = $this->http_post_json($url, $jsonStr);
-            var_dump($httpResult);
-//            $code = json_decode($httpResult['data'],true)['Code'];
-            $code = 200;
-            var_dump($id_arr);
+//            var_dump($httpResult);
+            $code = json_decode($httpResult['data'],true)['Code'];
+//            $code = 200;
+
             if ($code==200){
               DB::table('dic_order')->whereIn('id',$id_arr)->update(['status'=>2]);
 //              return $this->export($data);
