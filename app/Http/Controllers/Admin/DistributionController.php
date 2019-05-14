@@ -150,7 +150,7 @@ class DistributionController extends Controller{
             var_dump($httpResult);
             $code = json_decode($httpResult['data'],true)['Code'];
 //            $code = 200;
-
+            var_dump($code);
             if ($code==200){
               DB::table('dic_order')->whereIn('id',$id_arr)->update(['status'=>2]);
 //              return $this->export($data);
