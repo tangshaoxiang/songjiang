@@ -92,7 +92,7 @@ class SuppliesController extends Controller{
                     unset($data[$k]['ColdChainTempTo']);
                 }
 
-                DB::table('dic_consumable')->truncate();
+//                DB::table('dic_consumable')->truncate();
 //             dd($data);
                 foreach ($data as $k=>$v){
                     $result = DB::table('dic_consumable')->insert($v);
