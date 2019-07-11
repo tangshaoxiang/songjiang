@@ -28,7 +28,7 @@ class AdminLogin
             //取session中的admin
             $admin = session()->get('adminSession');
 
-//            if(isset($admin->aid)){
+            if(isset($admin->aid)){
                 $aid = $admin->aid;
                 //获取当前用户操作的控制器和方法
                 $accessinfo = $this->getCurrentAction(request()->route()->getActionName());
@@ -51,13 +51,13 @@ class AdminLogin
                 $result = self::getTree($data);
                 view()->share('result', $result);
                 return $next($request);
-//            }else{
-//                return redirect('/admin/login')->with('msg', '请重新登陆');
-//            }
+            }else{
+                return redirect('/admin/login')->with('msg', '请重新登陆');
+            }
 
         }else{
-            return $next($request);
-//            return redirect('/admin/login')->with('msg', '请先登录');
+//            return $next($request);
+            return redirect('/admin/login')->with('msg', '请先登录');
         }
     }
 

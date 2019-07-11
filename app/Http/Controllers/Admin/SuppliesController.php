@@ -34,8 +34,8 @@ class SuppliesController extends Controller{
         $param['MAC'] = $obj->macAddr;
 //        $id = $this->request->post('ID3');
         $id = '1791';
-//        $lastTime = DB::table('dic_consumable_time')->select('time')->where('ID3',$id)->orderBy('id','DESC')->limit(1)->get()->toArray();
-        $lastTime =$this->request->post('time');
+        $lastTime = DB::table('dic_consumable_time')->select('time')->where('ID3',$id)->orderBy('id','DESC')->limit(1)->get()->toArray();
+//        $lastTime =$this->request->post('time');
 //        $lastTime ="2018-01-01 01:01:01";
 //        if (empty($id)){
 //            return $this->errorResponse('供应商编码为空','206');
@@ -43,7 +43,7 @@ class SuppliesController extends Controller{
             $insert_time =date("Y-m-d h:m:s");
         DB::table('dic_consumable_time')->insert(['ID3'=>$id,'time'=>$insert_time]);
         $param['Data'] = array("ID3" => $id, "Last_time" => $lastTime);
-        echo json_encode($param);exit();
+//        echo json_encode($param);exit();
         $res = $this->http_post_json('http://222.72.92.35:8091/dep/business/get', json_encode($param));
         $data = $res['data'];
         $date = date('Y-m-d H:i:s',time());
