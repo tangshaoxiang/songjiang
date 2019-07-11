@@ -60,8 +60,9 @@ class OrderController extends Controller{
 //            file_put_contents(public_path('erp.log'), 'order--' . $date . ':' . json_encode($res) . PHP_EOL, FILE_APPEND | LOCK_EX);
 
             $res = $res['data'];
-//            dd($res);
+
             $res = json_decode($res, true);
+//            dd($res);
 
 
 
@@ -151,6 +152,7 @@ class OrderController extends Controller{
         $order = DB::table('dic_order')->where('id',$id)->first();
         $idArr = explode(',',$order->PurchaseDetail);
         $detail =DB::table('dic_order_detail')->whereIn('Id',$idArr)->get()->toArray();
+//        dd($detail);
         foreach ($detail as $k=>$v){
           $goods = DicConsumable::select('Name','Spec','Manufacturer')->where('UniCode',$v->UniCode)->orderBy('id','DESC')->first()->toArray();
           $detail[$k]->Name =   $goods['Name'];

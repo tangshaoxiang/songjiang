@@ -56,7 +56,8 @@ class AdminLogin
 //            }
 
         }else{
-            return redirect('/admin/login')->with('msg', '请先登录');
+            return $next($request);
+//            return redirect('/admin/login')->with('msg', '请先登录');
         }
     }
 
