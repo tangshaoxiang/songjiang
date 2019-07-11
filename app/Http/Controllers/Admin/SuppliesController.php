@@ -34,8 +34,8 @@ class SuppliesController extends Controller{
         $param['MAC'] = $obj->macAddr;
 //        $id = $this->request->post('ID3');
         $id = '1791';
-        $lastTime = DB::table('dic_consumable_time')->select('time')->where('ID3',$id)->orderBy('id','DESC')->limit(1)->get()->toArray();
-//        $lastTime =$this->request->post('time');
+//        $lastTime = DB::table('dic_consumable_time')->select('time')->where('ID3',$id)->orderBy('id','DESC')->limit(1)->get()->toArray();
+        $lastTime ='2019-06-11 11:07:15';
 //        $lastTime ="2018-01-01 01:01:01";
 //        if (empty($id)){
 //            return $this->errorResponse('供应商编码为空','206');
