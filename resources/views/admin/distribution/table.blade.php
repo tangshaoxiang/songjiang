@@ -32,4 +32,54 @@
     @endif
     </tbody>
 </table>
+<script>
+    //批量删除
+    $('#search_button').on('click', function () {
+        if ($('tbody input:checked').length == 0) {
+            alert('请至少选中一个数据')
+        } else {
+            if (confirm('确定推送吗')) {
+                var id = '';
+                $('tbody input:checked').each(function (k, v) {
+                    id = id + $(v).attr('data-id') + ','
+                })
+
+                var url = "{{url('admin/distribution')}}";
+                var SupplierCode = $('#SupplierCode').val();
+                var Kssj = $('#Kssj').val();
+                var Jssj = $('#Jssj').val();
+                var DownloadState = $('#DownloadState').val();
+                var Count = $('#Count').val();
+
+                $.post(url, {'SupplierCode': SupplierCode, 'Kssj': Kssj, 'Jssj': Jssj, 'DownloadState': DownloadState, 'Count': Count,'id':id}, function (data) {
+                    if (data==0){
+                        alert('推送失败')
+                    } else{
+                        $('#table').html(data);
+                        alert('推送成功')
+                    }
+                    {{--var ev = eval('(' + data + ')');--}}
+                    {{--if (ev.code==0) {--}}
+                    {{--$('tbody input:checked').each(function (k, v) {--}}
+                    {{--document.location.href ='{{url("")}}'+ev.url;--}}
+                    {{--var id = $(v).attr('data-id');--}}
+                    {{--// $('tr[order-id=' + id + ']').remove();--}}
+                    {{--})--}}
+                    {{--alert('推送成功');--}}
+                    {{--} else {--}}
+                    {{--alert('推送失败');--}}
+                    {{--}--}}
+                }, 'text')
+            }
+        }
+    })
+
+    $("#all").click(function () {
+        if (this.checked) {
+            $("tbody input:checkbox").prop("checked", true);
+        } else {
+            $("tbody input:checkbox").prop("checked", false);
+        }
+    });
+</script>
 {{ $data->links() }}
