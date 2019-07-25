@@ -133,6 +133,14 @@
                 }
             }
         })
+
+        $("#all").click(function () {
+            if (this.checked) {
+                $("tbody input:checkbox").prop("checked", true);
+            } else {
+                $("tbody input:checkbox").prop("checked", false);
+            }
+        });
     </script>
 
 @stop
