@@ -404,7 +404,7 @@ class OrderController extends Controller{
         $objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(10);
         $objPHPExcel->getActiveSheet()->getColumnDimension('D')->setWidth(10);
         $objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(10);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(10);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(15);
         $objPHPExcel->getActiveSheet()->getColumnDimension('G')->setWidth(15);
         $objPHPExcel->getActiveSheet()->getColumnDimension('H')->setWidth(10);
         $objPHPExcel->getActiveSheet()->getColumnDimension('I')->setWidth(10);
@@ -492,6 +492,7 @@ class OrderController extends Controller{
 //            $objPHPExcel->getActiveSheet()->setCellValue('A' . $two, '订单编码：'.$value['OrderNO']);
             $objPHPExcel->getActiveSheet()->setCellValue('J' . $two, '制单人:'.$value['Creator']);
             $objPHPExcel->getActiveSheet()->setCellValue('J' . $three, '备注：'.$value['Memo']);
+            $objPHPExcel->getActiveSheet()->setCellValue('F' . $last, '总金额：'.$value['Amount']);
 
 
             $objPHPExcel->getActiveSheet()->setCellValue('A' . $last, '送货单位及经手人：');
