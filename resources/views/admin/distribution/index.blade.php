@@ -110,12 +110,13 @@
                     var Jssj = $('#Jssj').val();
                     var DownloadState = $('#DownloadState').val();
                     var Count = $('#Count').val();
-                    //
+
                     $.post(url, {'SupplierCode': SupplierCode, 'Kssj': Kssj, 'Jssj': Jssj, 'DownloadState': DownloadState, 'Count': Count,'id':id}, function (data) {
                        if (data==0){
                            alert('推送失败')
                        } else{
-                           $('#table').html(data);
+                           window.location.reload();
+                           // $('#table').html(data);
                            alert('推送成功')
                        }
                         {{--var ev = eval('(' + data + ')');--}}

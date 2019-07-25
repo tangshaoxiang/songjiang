@@ -154,9 +154,9 @@ class DistributionController extends Controller{
             if ($code==0){
                 $res = DB::table('dic_order')->whereIn('id',$id_arr)->update(['status'=>2]);
                 if($res){
-//                    return $this->export($data);
-                    $data = DB::table('dic_order')->where('status','1')->orderBy('id', 'DESC')->paginate(15);
-                    return view('admin/distribution/table',['data'=>$data]);
+                    return 1;
+//                    $data = DB::table('dic_order')->where('status','1')->orderBy('id', 'DESC')->paginate(15);
+//                    return view('admin/distribution/table',['data'=>$data]);
                 }
 
             }else{
