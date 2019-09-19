@@ -144,10 +144,10 @@ class DistributionController extends Controller{
 //            $url = "www.songjiang.cn:8000/admin/get_back";
 
 
-        $url = "http://222.72.92.35:8091/dep/business/post";
+            $url = "http://222.72.92.35:8091/dep/business/post";
             $jsonStr = json_encode($param);
             $httpResult = $this->http_post_json($url, $jsonStr);
-          
+
             $code = json_decode($httpResult['data'],true)['Code'];
 //            $code = 200;
 //            var_dump($code);
@@ -169,6 +169,9 @@ class DistributionController extends Controller{
         }
     }
 
+    public function bodyHtml(){
+        return view('admin/distribution/body');
+    }
 
 
     public function export($data){
@@ -294,11 +297,11 @@ class DistributionController extends Controller{
 
 //返回已经存好的文件目录地址提供下载
         $response = [   'code' => 0,
-                        'url'  => $this->saveExcelToLocalFile($xlsWriter,$outputFileName)];
+            'url'  => $this->saveExcelToLocalFile($xlsWriter,$outputFileName)];
         return $response;
     }
 
-   public function saveExcelToLocalFile($objWriter,$filename){
+    public function saveExcelToLocalFile($objWriter,$filename){
         // make sure you have permission to write to directory
         $filePath = public_path().'/tmp/'.$filename;
         $objWriter->save($filePath);
