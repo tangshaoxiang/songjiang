@@ -325,7 +325,7 @@
                             if (data==0){
                                 alert('推送失败')
                             } else{
-                                // window.location.reload();
+                                window.location.reload();
                                 // $('#table').html(data);
                                 alert('推送成功')
                             }
