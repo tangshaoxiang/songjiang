@@ -147,13 +147,13 @@ class DistributionController extends Controller{
             $url = "http://222.72.92.35:8091/dep/business/post";
             $jsonStr = json_encode($param);
             $httpResult = $this->http_post_json($url, $jsonStr);
-
             $code = json_decode($httpResult['data'],true)['Code'];
 //            $code = 200;
 //            var_dump($code);
             if ($code==0){
                 $res = DB::table('dic_order')->whereIn('id',$id_arr)->update(['status'=>2]);
                 if($res){
+                    $res = DB::table('dic_order')->whereIn('id',$id_arr)->update(['status'=>2]);
                     return 1;
 //                    $data = DB::table('dic_order')->where('status','1')->orderBy('id', 'DESC')->paginate(15);
 //                    return view('admin/distribution/table',['data'=>$data]);
