@@ -321,6 +321,7 @@
                         },
                         success: function (data) {
                             hideLoading()
+
                             if (data==0){
                                 alert('推送失败')
                             } else{
