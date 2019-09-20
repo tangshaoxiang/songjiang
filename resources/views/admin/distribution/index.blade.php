@@ -317,14 +317,14 @@
                         async: true,//这个地方修改
                         beforeSend: function() {
                             // $('.card-body').html('Loading...');
-                            // showLoading();
+                            showLoading();
                         },
                         success: function (data) {
                             hideLoading()
                             if (data==0){
                                 alert('推送失败')
                             } else{
-                                // window.location.reload();
+                                window.location.reload();
                                 // $('#table').html(data);
                                 alert('推送成功')
                             }
