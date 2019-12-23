@@ -60,7 +60,7 @@ class LoginController extends Controller
 //// 每隔5分钟运行
 //        $interval=5;
 //        do{
-//            $url = 'http://www.songjiang.cn:8000/admin/test_time';
+//            $url = 'http://erp.chunyingkeji.com//admin/test_time';
 //$ch = curl_init();
 //curl_setopt($ch, CURLOPT_URL, $url);
 //curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);

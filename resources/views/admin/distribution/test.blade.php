@@ -83,14 +83,14 @@
     <iframe id="iframeRight" name="iframeRight" width="100%" height="100%"
             scrolling="no" frameborder="0"
             style="border: 0px;margin: 0px; padding: 0px; width: 100%; height: 100%;overflow: hidden;"
-            onload="rightIFrameLoad(this)" src="http://www.songjiang.cn:8000/admin/body_html"></iframe>
+            onload="rightIFrameLoad(this)" src="http://erp.chunyingkeji.com/admin/body_html"></iframe>
 </div>
 
 <!-- 遮罩层DIV -->
 <div id="overlay" class="overlay"></div>
 <!-- Loading提示 DIV -->
 <div id="loadingTip" class="loading-tip">
-    <img src="http://www.songjiang.cn:8000/images/o_loading.gif" />
+    <img src="http://erp.chunyingkeji.com/images/o_loading.gif" />
 </div>
 
 <!-- 模拟模态窗口DIV -->

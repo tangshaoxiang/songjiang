@@ -159,7 +159,7 @@
     <!-- 遮罩层DIV -->
     <div id="overlay" class="overlay"></div>
     <div id="loadingTip" class="loading-tip">
-        <img src="http://www.songjiang.cn:8000/images/o_loading.gif" />
+        <img src="http://erp.chunyingkeji.com/images/o_loading.gif" />
     </div>
 
     <script type="text/javascript" >
