@@ -44,6 +44,7 @@
     <script src="{{asset('js/html2canvas.js')}}"></script>
     <!-- layer -->
     <script src="{{asset('layer/layer.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>

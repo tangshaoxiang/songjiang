@@ -309,4 +309,11 @@ class DistributionController extends Controller{
         return '/tmp/'.$filename;
     }
 
+
+    public function havePushPrint()
+    {
+        $data = DB::table('dic_order')->where('Status','2')->orderBy('id', 'DESC')->paginate(15);
+        return view('admin/distribution/havePushPrint',['data'=>$data]);
+    }
+
 }
