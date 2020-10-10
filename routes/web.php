@@ -87,7 +87,9 @@ Route::group([
         Route::any('order_detail','OrderController@orderDetail');         //订单详情
         Route::any('order_get','OrderController@get');                    //erp
         Route::any('order_excel','OrderController@orderExcel');           //erp获取订单excel
-        Route::any('order_pdf','OrderController@orderPdf');           //pdf
+        Route::any('havePushExcel','OrderController@havePushExcel');      //erp获取已推送配送单excel
+        Route::any('havePushManyExcel','OrderController@havePushManyExcel');//erp获取已推送配送单excel
+        Route::any('order_pdf','OrderController@orderPdf');               //pdf
 
 
         /**
@@ -102,6 +104,7 @@ Route::group([
          * 推送配送单
          */
         Route::any('distribution','DistributionController@index');                      //erp获取退货单
+        Route::any('havePushPrint','DistributionController@havePushPrint');                      //erp获取退货单
         Route::any('body_html','DistributionController@bodyHtml');
         Route::any('get_back','DistributionController@getBack');
         Route::any('export','DistributionController@export');
