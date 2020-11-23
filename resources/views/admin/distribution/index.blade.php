@@ -320,6 +320,7 @@
                             showLoading();
                         },
                         success: function (data) {
+                            alert(data);
                             hideLoading()
 
                             if (data==0){
