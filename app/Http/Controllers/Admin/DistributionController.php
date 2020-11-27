@@ -147,7 +147,7 @@ class DistributionController extends Controller{
             $url = "http://222.72.92.35:8091/dep/business/post";
             $jsonStr = json_encode($param);
             $httpResult = $this->http_post_json($url, $jsonStr);
-            file_put_contents(storage_path() . '/logs/test.log', $httpResult . PHP_EOL, JSON_UNESCAPED_UNICODE);
+            file_put_contents(storage_path() . '/logs/test.log', json_encode($httpResult) . PHP_EOL, JSON_UNESCAPED_UNICODE);
             $code = json_decode($httpResult['data'],true)['Code'];
 //            $code = 200;
 //            var_dump($code);
@@ -160,7 +160,7 @@ class DistributionController extends Controller{
                 }
 
             }else{
-                $res = DB::table('dic_order')->whereIn('id',$id_arr)->update(['status'=>2]);
+//                $res = DB::table('dic_order')->whereIn('id',$id_arr)->update(['status'=>2]);
                 return 0;
             }
 
