@@ -32,7 +32,7 @@ class DistributionController extends Controller{
             $param['IP'] = $this->get_real_ip();
             $param['MAC'] = $obj->macAddr;
             $param['HostName'] = $_SERVER['SERVER_NAME'];
-            $order = DicOrder::where('status',1)->whereIn('id',$id_arr)->get()->toArray();
+            $order = DicOrder::whereIn('id',$id_arr)->get()->toArray();
             //获取订单明细数据$orderDetail
             $orderDetail = array_column($order,'PurchaseDetail');
             foreach ($orderDetail as $k=>$id_str){
@@ -160,7 +160,7 @@ class DistributionController extends Controller{
                 }
 
             }else{
-//                $res = DB::table('dic_order')->whereIn('id',$id_arr)->update(['status'=>2]);
+                $res = DB::table('dic_order')->whereIn('id',$id_arr)->update(['status'=>2]);
                 return 0;
             }
 

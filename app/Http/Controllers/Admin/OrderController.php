@@ -273,7 +273,7 @@ class OrderController extends Controller{
             $id  = Request()->input('id');
             $id = rtrim($id,',');
             $id_arr = explode(',',$id);
-            $order = DicOrder::where('status',$status)->whereIn('id',$id_arr)->get()->toArray();
+            $order = DicOrder::whereIn('id',$id_arr)->get()->toArray();
             //获取订单明细数据$orderDetail
             $orderDetail = array_column($order,'PurchaseDetail');
             foreach ($orderDetail as $k=>$id_str){
