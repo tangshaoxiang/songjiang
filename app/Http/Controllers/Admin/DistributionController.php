@@ -147,10 +147,18 @@ class DistributionController extends Controller{
             $url = "http://222.72.92.35:8091/dep/business/post";
             $jsonStr = json_encode($param);
             $httpResult = $this->http_post_json($url, $jsonStr);
-            file_put_contents(storage_path() . '/logs/test.log', json_encode($httpResult) . PHP_EOL, JSON_UNESCAPED_UNICODE);
-            $code = json_decode($httpResult['data'],true)['Code'];
+            $httpResult = json_decode($httpResult['data'],true);
+            file_put_contents(storage_path() . '/logs/test.log', json_encode($httpResult, JSON_UNESCAPED_UNICODE) . PHP_EOL, FILE_APPEND);
+            $code = $httpResult['Code'];
+            $httpData = $httpResult['Data'];
+            foreach ($httpData as $k => $v) {
+                  if ($v['Message'] == '数据已上传') {
+                      unset($httpData[$k]);
+                  }
+            }
+            $httpData = array_values($httpData);
+            if (empty($httpData)) $code = 0;
 //            $code = 200;
-//            var_dump($code);
             if ($code==0){
                 $res = DB::table('dic_order')->whereIn('id',$id_arr)->update(['status'=>2]);
                 if($res){
