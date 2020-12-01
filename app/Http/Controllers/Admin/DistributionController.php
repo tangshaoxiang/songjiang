@@ -153,6 +153,7 @@ class DistributionController extends Controller{
             $code = $httpResult['Code'];
             $httpData = $httpResult['Data'];
             $orderNo = [];
+            $failAuditOrderNo = [];
             foreach ($httpData as $k => $v) {
                   $message = $v['Message'] ?? '';
                   if ($message == '数据已上传' || $message == '成功') {
@@ -160,12 +161,14 @@ class DistributionController extends Controller{
                   }
                 if ($message == 'F,入库单审核失败!') {
                     $failAuditOrderNo[] = $v;
-                    file_put_contents(storage_path() . '/logs/test.log', 'F,入库单审核失败!' . json_encode($failAuditOrderNo, JSON_UNESCAPED_UNICODE) . PHP_EOL, FILE_APPEND);
-                }
+                 }
                   $orderNo[] = $v['OrderNo'];
             }
             $httpData = array_values($httpData);
-
+            if (!empty($failAuditOrderNo))  {
+                $failAuditOrderIds = '';
+                file_put_contents(storage_path() . '/logs/test.log', 'F,入库单审核失败!' . json_encode($failAuditOrderNo, JSON_UNESCAPED_UNICODE) . PHP_EOL, FILE_APPEND);
+            }
             if (empty($httpData)) $code = 0;
 //            $code = 200;
             if ($code==0){
