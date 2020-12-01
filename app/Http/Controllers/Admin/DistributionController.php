@@ -158,6 +158,10 @@ class DistributionController extends Controller{
                   if ($message == '数据已上传' || $message == '成功') {
                       unset($httpData[$k]);
                   }
+                if ($message == 'F,入库单审核失败!') {
+                    $failAuditOrderNo[] = $v;
+                    file_put_contents(storage_path() . '/logs/test.log', 'F,入库单审核失败!' . json_encode($failAuditOrderNo, JSON_UNESCAPED_UNICODE) . PHP_EOL, FILE_APPEND);
+                }
                   $orderNo[] = $v['OrderNo'];
             }
             $httpData = array_values($httpData);
