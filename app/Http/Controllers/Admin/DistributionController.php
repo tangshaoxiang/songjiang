@@ -152,7 +152,8 @@ class DistributionController extends Controller{
             $code = $httpResult['Code'];
             $httpData = $httpResult['Data'];
             foreach ($httpData as $k => $v) {
-                  if ($v['Message'] == '数据已上传') {
+                  $message = $v['Message'] ?? '';
+                  if ($message == '数据已上传' || $message == '成功') {
                       unset($httpData[$k]);
                   }
             }
