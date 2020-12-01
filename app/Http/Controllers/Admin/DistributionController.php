@@ -169,7 +169,7 @@ class DistributionController extends Controller{
                 }
 
             }else{
-                $res = DB::table('dic_order')->whereIn('id',$id_arr)->update(['status'=>2]);
+//                $res = DB::table('dic_order')->whereIn('id',$id_arr)->update(['status'=>2]);
                 return 0;
             }
 
