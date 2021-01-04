@@ -83,7 +83,9 @@ class LoginController extends Controller
 
     public function login()
     {
+
         if ($this->request->isMethod('post')) {
+            return back()->withErrors('费用已到期');
             $this->validate($this->request, [
                 'admin_name' => 'required',
                 'admin_pwd' => 'required',
