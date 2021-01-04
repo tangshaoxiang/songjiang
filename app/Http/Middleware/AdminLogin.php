@@ -21,7 +21,7 @@ class AdminLogin
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        return redirect('/admin/login')->with('msg', '费用到期');
+//        return redirect('/admin/login')->with('msg', '费用到期');
         if ($request->cookie('adminCookie') != null && session('adminSession') == null) {
         session()->put('adminSession', $request->cookie('adminCookie'));
         }
