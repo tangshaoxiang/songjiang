@@ -27,6 +27,7 @@ class OrderController extends Controller{
             $obj = new GetMac('linux');
             $param['BusinessType'] = "MY101";
             $param['HospitalCode'] = "Test001";
+            // $param['HospitalCode'] = "425060842";
             $param['IP'] = $this->get_real_ip();
             $param['MAC'] = $obj->macAddr;
             $param['HostName'] = $_SERVER['SERVER_NAME'];
@@ -68,7 +69,11 @@ class OrderController extends Controller{
                 if ($res['Code']== '-10000') return $this->errorResponse('卫宁错误：'.$res['Data'], '206');
             }
 
-
+            if (isset($res['Code'])){
+                if ($res['Code'] == 0) {
+                    return $this->errorResponse('卫宁错误：'.json_encode($res, 256), '206');
+                }
+            }
 
 
 

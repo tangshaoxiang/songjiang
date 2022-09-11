@@ -30,6 +30,7 @@ class SuppliesController extends Controller{
         $obj = new GetMac('linux');
         $param['BusinessType'] = "MY003";
         $param['HospitalCode'] = "Test001";
+        // $param['HospitalCode'] = "425060842";
         $param['IP'] = $this->get_real_ip();
         $param['MAC'] = $obj->macAddr;
 //        $id = $this->request->post('ID3');
