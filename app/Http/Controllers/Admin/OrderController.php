@@ -26,11 +26,11 @@ class OrderController extends Controller{
         if ($this->request->isMethod('post')) {
             $obj = new GetMac('linux');
             $param['BusinessType'] = "MY101";
-            $param['HospitalCode'] = "Test001";
-            // $param['HospitalCode'] = "425060842";
-            $param['IP'] = $this->get_real_ip();
-            $param['MAC'] = $obj->macAddr;
-            $param['HostName'] = $_SERVER['SERVER_NAME'];
+            // $param['HospitalCode'] = "Test001";
+            $param['HospitalCode'] = "425060842";
+            // $param['IP'] = $this->get_real_ip();
+            // $param['MAC'] = $obj->macAddr;
+            // $param['HostName'] = $_SERVER['SERVER_NAME'];
             $supplierCode = $this->request->post('SupplierCode');
             $count = $this->request->post('Count');
             $downloadState = $this->request->post('DownloadState');
@@ -50,8 +50,8 @@ class OrderController extends Controller{
                 return $this->errorResponse('结束时间为空', '206');
             }
             $date = date('Y-m-d H:i:s', time());
-            $param['Data'] = array("SupplierCode" => $supplierCode, "Count" => $count, "DownloadState" => $downloadState, "Kssj" => $kssj, "Jssj" => $jssj);
-
+            // $param['Data'] = array("SupplierCode" => $supplierCode, "Count" => $count, "DownloadState" => $downloadState, "Kssj" => $kssj, "Jssj" => $jssj);
+            $param['Data'] = array("Last_time" => $jssj);
 
 //            $res = $this->getCurl('www.songjiang.cn:8000/admin/order_get?' . http_build_query($param));
 //            $res = json_decode($res, true);
