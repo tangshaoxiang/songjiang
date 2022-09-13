@@ -65,12 +65,18 @@ class OrderController extends Controller{
             $res = $res['data'];
 
             $res = json_decode($res, true);
-            if (isset($res['Code'])){
-                if ($res['Code']== '-10000') return $this->errorResponse('卫宁错误：'.$res['Data'], '206');
-            }
+            // if (isset($res['Code'])){
+            //     if ($res['Code']== '-10000') return $this->errorResponse('卫宁错误：'.$res['Data'], '206');
+            // }
+            //
+            // if (isset($res['Code'])){
+            //     if ($res['Code'] == 0) {
+            //         return $this->errorResponse('卫宁错误：'.json_encode($res, 256), '206');
+            //     }
+            // }
 
             if (isset($res['Code'])){
-                if ($res['Code'] == 0) {
+                if ($res['Code'] != 0) {
                     return $this->errorResponse('卫宁错误：'.json_encode($res, 256), '206');
                 }
             }
