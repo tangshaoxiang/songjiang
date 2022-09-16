@@ -431,14 +431,14 @@ class OrderController extends Controller{
         // 设置表格宽度
         $objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(25);
         $objPHPExcel->getActiveSheet()->getColumnDimension('B')->setWidth(25);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(10);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('D')->setWidth(10);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(10);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(15);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('G')->setWidth(15);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('H')->setWidth(10);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('I')->setWidth(10);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('J')->setWidth(30);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(25);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('D')->setWidth(25);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(25);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(25);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('G')->setWidth(25);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('H')->setWidth(25);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('I')->setWidth(25);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('J')->setWidth(25);
 
 
 
@@ -449,7 +449,7 @@ class OrderController extends Controller{
             ->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
         // 列名赋值
-        $objPHPExcel->getActiveSheet()->setCellValue('A1', '上海雨桓实业有限公司');
+        $objPHPExcel->getActiveSheet()->setCellValue('A1', '上海信瑶实业有限公司');
         $objPHPExcel->getActiveSheet()->setCellValue('A2', $singleNameNote);
         $objPHPExcel->getActiveSheet()->setCellValue('A3', '客户名称：松江区中心医院');
         $objPHPExcel->getActiveSheet()->setCellValue('J3', '送货日期');
