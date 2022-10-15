@@ -61,14 +61,11 @@ class OrderController extends Controller{
             $res = $this->http_post_json('http://222.72.92.35:8091/dep/business/get', json_encode($param));
 //            file_put_contents(public_path('erp.log'), 'order--' . $date . ':' . json_encode($res) . PHP_EOL, FILE_APPEND | LOCK_EX);
 
-            $completed = $res['Completed'];
-            if (!$completed) {
-                return $this->errorResponse('获取数据为空：'.json_encode($res, 256), '206');
-            }
+            $resData = $res['data'];
+            var_dump($resData);
+            var_dump(3333);
 
-            $res = $res['data'];
-
-            $res = json_decode($res, true);
+            $resData = json_decode($resData, true);
             // if (isset($res['Code'])){
             //     if ($res['Code']== '-10000') return $this->errorResponse('卫宁错误：'.$res['Data'], '206');
             // }
@@ -79,16 +76,15 @@ class OrderController extends Controller{
             //     }
             // }
 
-            if (isset($res['Code'])){
-                if ($res['Code'] != 0) {
-                    return $this->errorResponse('卫宁错误：'.json_encode($res, 256), '206');
+            if (isset($resData['Code'])){
+                if ($resData['Code'] != 0) {
+                    return $this->errorResponse('卫宁错误：'.json_encode($resData, 256), '206');
                 }
             }
 
-
-
-
-
+            if (isset($resData['Completed']) && !$resData['Completed']){
+                return $this->errorResponse('获取数据为空：'.json_encode($resData, 256), '206');
+            }
 
 
 //            $p = array('BusinessType', 'HospitalCode', 'IP', 'MAC', 'HostName', 'Data');
@@ -99,8 +95,9 @@ class OrderController extends Controller{
 //            }
             $token = time() . uniqid();
 
-            $res_data  = $res['Data'];
-
+            $res_data  = $resData['Data'];
+            var_dump($res_data);
+            var_dump(6666);
             foreach ($res_data as $k=>$v){
                 foreach ($v['PurchaseDetail'] as $k1=>$v1){
                     if (empty($v1['DeptCode'])||empty($v1['StoreCode'])){
