@@ -467,7 +467,7 @@ class OrderController extends Controller{
         $objPHPExcel->getActiveSheet()->setCellValue('E5', '数量');
         $objPHPExcel->getActiveSheet()->setCellValue('F5', '金额');
         $objPHPExcel->getActiveSheet()->setCellValue('G5', '科室名称');
-        $objPHPExcel->getActiveSheet()->setCellValue('H5', '厂商');
+        $objPHPExcel->getActiveSheet()->setCellValue('H5', '品牌');
         $objPHPExcel->getActiveSheet()->setCellValue('I5', '备注');
 
 
