@@ -63,6 +63,7 @@ class OrderController extends Controller{
 
 
             $res = $res['data'];
+            var_dump($res);
 
             $res = json_decode($res, true);
             // if (isset($res['Code'])){
@@ -94,6 +95,7 @@ class OrderController extends Controller{
 //                    exit($j . '不存在');
 //            }
             $token = time() . uniqid();
+            var_dump($res);
 
             $res_data  = $res['Data'];
 
