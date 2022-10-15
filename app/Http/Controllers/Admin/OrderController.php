@@ -439,6 +439,7 @@ class OrderController extends Controller{
         $objPHPExcel->getActiveSheet()->getColumnDimension('H')->setWidth(25);
         $objPHPExcel->getActiveSheet()->getColumnDimension('I')->setWidth(25);
         $objPHPExcel->getActiveSheet()->getColumnDimension('J')->setWidth(25);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('K')->setWidth(25);
 
 
 
@@ -469,8 +470,8 @@ class OrderController extends Controller{
         $objPHPExcel->getActiveSheet()->setCellValue('E5', '数量');
         $objPHPExcel->getActiveSheet()->setCellValue('F5', '金额');
         $objPHPExcel->getActiveSheet()->setCellValue('G5', '科室名称');
-        $objPHPExcel->getActiveSheet()->setCellValue('H5', '备注');
-        $objPHPExcel->getActiveSheet()->setCellValue('I5', '');
+        $objPHPExcel->getActiveSheet()->setCellValue('H5', '厂商');
+        $objPHPExcel->getActiveSheet()->setCellValue('I5', '备注');
 
 
 
@@ -507,6 +508,7 @@ class OrderController extends Controller{
                 $objPHPExcel->getActiveSheet()->setCellValue('E' . $row_num, $v['Quantity']);
                 $objPHPExcel->getActiveSheet()->setCellValue('F' . $row_num, $v['Amount']);
                 $objPHPExcel->getActiveSheet()->setCellValue('G' . $row_num, $v['DeptName']);
+                $objPHPExcel->getActiveSheet()->setCellValue('H' . $row_num, $v['Manufacturer']);
             }
             $row_num = $row_num + abs($count - 3) ;
             $row_num++;
