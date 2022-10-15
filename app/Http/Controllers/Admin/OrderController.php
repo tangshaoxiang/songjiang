@@ -475,7 +475,6 @@ class OrderController extends Controller{
         // 数据起始行
         $row_num = 6;
         $res =$data;
-//        dd($res);
         //向每行单元格插入数据
         foreach($res as $value)
         {
