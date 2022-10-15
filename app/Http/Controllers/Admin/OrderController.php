@@ -144,6 +144,7 @@ class OrderController extends Controller{
 //                $data['HostName'] = $res['HostName'];
                 $data['Token'] = $token;
                 $data['CreatedAt'] = $date;
+                $data['LastTime'] = $jssj;
                 $insert_order_data[$k] = $data;
             }
 
