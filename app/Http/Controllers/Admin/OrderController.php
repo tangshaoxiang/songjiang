@@ -61,9 +61,12 @@ class OrderController extends Controller{
             $res = $this->http_post_json('http://222.72.92.35:8091/dep/business/get', json_encode($param));
 //            file_put_contents(public_path('erp.log'), 'order--' . $date . ':' . json_encode($res) . PHP_EOL, FILE_APPEND | LOCK_EX);
 
+            $completed = $res['Completed'];
+            if (!$completed) {
+                return $this->errorResponse('获取数据为空：'.json_encode($res, 256), '206');
+            }
 
             $res = $res['data'];
-            var_dump($res);
 
             $res = json_decode($res, true);
             // if (isset($res['Code'])){
@@ -95,7 +98,6 @@ class OrderController extends Controller{
 //                    exit($j . '不存在');
 //            }
             $token = time() . uniqid();
-            var_dump($res);
 
             $res_data  = $res['Data'];
 
