@@ -62,8 +62,6 @@ class OrderController extends Controller{
 //            file_put_contents(public_path('erp.log'), 'order--' . $date . ':' . json_encode($res) . PHP_EOL, FILE_APPEND | LOCK_EX);
 
             $resData = $res['data'];
-            var_dump($resData);
-            var_dump(3333);
 
             $resData = json_decode($resData, true);
             // if (isset($res['Code'])){
@@ -82,10 +80,6 @@ class OrderController extends Controller{
                 }
             }
 
-            if (isset($resData['Completed']) && !$resData['Completed']){
-                return $this->errorResponse('获取数据为空：'.json_encode($resData, 256), '206');
-            }
-
 
 //            $p = array('BusinessType', 'HospitalCode', 'IP', 'MAC', 'HostName', 'Data');
 //            for ($i = 0; $i < count($p); $i++) {
@@ -94,10 +88,12 @@ class OrderController extends Controller{
 //                    exit($j . '不存在');
 //            }
             $token = time() . uniqid();
+            if (!isset($resData['Data'])){
+                return $this->errorResponse('获取数据为空：'.json_encode($resData, 256), '206');
+            }
 
             $res_data  = $resData['Data'];
-            var_dump($res_data);
-            var_dump(6666);
+
             foreach ($res_data as $k=>$v){
                 foreach ($v['PurchaseDetail'] as $k1=>$v1){
                     if (empty($v1['DeptCode'])||empty($v1['StoreCode'])){
