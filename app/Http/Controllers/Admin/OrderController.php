@@ -56,10 +56,9 @@ class OrderController extends Controller{
 //            $res = $this->getCurl('www.songjiang.cn:8000/admin/order_get?' . http_build_query($param));
 //            $res = json_decode($res, true);
 
-
-
+            file_put_contents(storage_path() . '/logs/order.log', json_encode($param, JSON_UNESCAPED_UNICODE) . PHP_EOL, FILE_APPEND);
             $res = $this->http_post_json('http://222.72.92.35:8091/dep/business/get', json_encode($param));
-//            file_put_contents(public_path('erp.log'), 'order--' . $date . ':' . json_encode($res) . PHP_EOL, FILE_APPEND | LOCK_EX);
+            file_put_contents(storage_path() . '/logs/order.log', json_encode($res, JSON_UNESCAPED_UNICODE) . PHP_EOL, FILE_APPEND);
 
             $resData = $res['data'];
 
