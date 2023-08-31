@@ -133,7 +133,8 @@ class Controller extends BaseController
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
                 'Content-Type: application/json; charset=utf-8',
                 // 'Code:1791',
-                'Code:2572',
+//                'Code:2572',
+                'Code:2778',
                 'Content-Length: ' . strlen($jsonStr),
             )
         );

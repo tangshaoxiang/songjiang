@@ -35,7 +35,7 @@
                                         <div id="example1_filter" class="dataTables_filter" style="text-align: left">
                                             <label>
                                                 供应商编码:
-                                                <input id="ID3" name="example1_length"  class="form-control form-control-sm" aria-controls="example1" value="1791" readonly>
+                                                <input id="ID3" name="example1_length"  class="form-control form-control-sm" aria-controls="example1" value="2778" readonly>
 
                                                 上次获取时间:
                                                 <input id="time" name="example1_length"  class="form-control form-control-sm" aria-controls="example1" readonly value="">

@@ -35,7 +35,7 @@
                                         <div id="example1_filter" class="dataTables_filter" style="text-align: left">
                                             <label>
                                                 供应商编码:
-                                                <input id="SupplierCode" name="example1_length"  class="form-control form-control-sm" aria-controls="example1" value="1791" readonly>
+                                                <input id="SupplierCode" name="example1_length"  class="form-control form-control-sm" aria-controls="example1" value="2778" readonly>
                                                 开始时间:
                                                 <input id="Kssj" type="date" name="example1_length"  class="form-control form-control-sm" aria-controls="example1" value="">
                                                 结束时间:

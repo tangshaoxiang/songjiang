@@ -34,7 +34,7 @@ class SuppliesController extends Controller{
         $param['IP'] = $this->get_real_ip();
         $param['MAC'] = $obj->macAddr;
 //        $id = $this->request->post('ID3');
-        $id = '1791';
+        $id = '2778';
 //        $lastTime = DB::table('dic_consumable_time')->select('time')->where('ID3',$id)->orderBy('id','DESC')->limit(1)->get()->toArray();
         $lastTime ='2019-06-11 11:07:15';
 //        $lastTime ="2018-01-01 01:01:01";
