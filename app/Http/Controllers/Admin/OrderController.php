@@ -446,7 +446,8 @@ class OrderController extends Controller{
             ->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
         // 列名赋值
-        $objPHPExcel->getActiveSheet()->setCellValue('A1', '上海信瑶实业有限公司');
+        $objPHPExcel->getActiveSheet()->setCellValue('A1', '上海协采数码科技有限公司');
+//        $objPHPExcel->getActiveSheet()->setCellValue('A1', '上海信瑶实业有限公司');
         $objPHPExcel->getActiveSheet()->setCellValue('A2', $singleNameNote);
         $objPHPExcel->getActiveSheet()->setCellValue('A3', '客户名称：松江区中心医院');
         $objPHPExcel->getActiveSheet()->setCellValue('J3', '送货日期');
