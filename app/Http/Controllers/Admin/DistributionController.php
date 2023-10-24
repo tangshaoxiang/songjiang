@@ -144,7 +144,7 @@ class DistributionController extends Controller{
 //          $url = "www.songjiang.cn:8000/admin/get_back";
 
 
-            $url = "http://222.72.92.35:8091/dep/business/post";
+            $url = "https://tj.sjzxyy.com/wz/dep/business/post";
             $jsonStr = json_encode($param);
             $httpResult = $this->http_post_json($url, $jsonStr);
             file_put_contents(storage_path() . '/logs/test.log', json_encode($param, JSON_UNESCAPED_UNICODE) . PHP_EOL, FILE_APPEND);

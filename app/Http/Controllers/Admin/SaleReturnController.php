@@ -55,7 +55,7 @@ class SaleReturnController extends Controller{
 //            $res = json_decode($res, true);
 
 
-            $res = $this->http_post_json('http://222.72.92.35:8091/dep/business/get', json_encode($param));
+            $res = $this->http_post_json('https://tj.sjzxyy.com/wz/dep/business/get', json_encode($param));
 //            file_put_contents(public_path('erp.log'), 'order--' . $date . ':' . json_encode($res) . PHP_EOL, FILE_APPEND | LOCK_EX);
             $res = $res['data'];
             $res = json_decode($res, true);

@@ -57,7 +57,7 @@ class OrderController extends Controller{
 //            $res = json_decode($res, true);
 
             file_put_contents(storage_path() . '/logs/order.log', json_encode($param, JSON_UNESCAPED_UNICODE) . PHP_EOL, FILE_APPEND);
-            $res = $this->http_post_json('http://222.72.92.35:8091/dep/business/get', json_encode($param));
+            $res = $this->http_post_json('https://tj.sjzxyy.com/wz/dep/business/get', json_encode($param));
             file_put_contents(storage_path() . '/logs/order.log', json_encode($res, JSON_UNESCAPED_UNICODE) . PHP_EOL, FILE_APPEND);
 
             $resData = $res['data'];
@@ -683,7 +683,7 @@ class OrderController extends Controller{
 //            $url = "www.songjiang.cn:8000/admin/get_back";
 
 
-//            $url = "http://222.72.92.35:8091/dep/business/post";
+//            $url = "https://tj.sjzxyy.com/wz/dep/business/post";
 //            $jsonStr = json_encode($param);
 //           echo $jsonStr;exit();
 //            $httpResult = $this->http_post_json($url, $jsonStr);

@@ -45,7 +45,7 @@ class SuppliesController extends Controller{
         DB::table('dic_consumable_time')->insert(['ID3'=>$id,'time'=>$insert_time]);
         $param['Data'] = array("ID3" => $id, "Last_time" => $lastTime);
 //        echo json_encode($param);exit();
-        $res = $this->http_post_json('http://222.72.92.35:8091/dep/business/get', json_encode($param));
+        $res = $this->http_post_json('https://tj.sjzxyy.com/wz/dep/business/get', json_encode($param));
         $data = $res['data'];
         $date = date('Y-m-d H:i:s',time());
 //        file_put_contents('./public/param.txt','consumable--'.$date.':'.json_encode($res).PHP_EOL,FILE_APPEND|LOCK_EX);
